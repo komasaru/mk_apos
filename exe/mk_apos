@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require "mk_apos"
+
+a = MkApos.new(*ARGV)  # JPLEPH's path, UTC
+p a.utc.strftime('%Y-%m-%d %H:%M:%S.%3N')
+p a.tdb.strftime('%Y-%m-%d %H:%M:%S.%3N')
+p a.jd_tdb
+p a.sun
+p a.moon
+
