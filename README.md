@@ -1,8 +1,14 @@
 # MkApos
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/mk_apos`. To experiment with that code, run `bin/console` for an interactive prompt.
+This is the gem library which calculates apparent positions of SUn and Moon.
 
-TODO: Delete this and the text above, and describe your gem
+## Preparation
+
+This library needs a JPL's DE430 binary file.
+
+Download linux_p1550p2650.430 from [ftp://ssd.jpl.nasa.gov/pub/eph/planets/Linux/de430/](ftp://ssd.jpl.nasa.gov/pub/eph/planets/Linux/de430/), and place at a suitable directory.
+
+If neccessary, rename the binary file.
 
 ## Installation
 
@@ -22,7 +28,25 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Instantiation
+
+    require "mk_apos"
+    
+    a = MkApos.new("/path/to/<JPLEPH binary>", "20160914")
+    a = MkApos.new("/path/to/<JPLEPH binary>", "20160914123456")
+    a = MkApos.new("/path/to/<JPLEPH binary>", "2016091412345698765")
+    a = MkApos.new("/path/to/<JPLEPH binary>")
+
+* You can set UTC formatted `YYYYMMDD` or `YYYYMMDDHHMMSS` or `YYYYMMDDHHMMSSU...` as an argument. (`U` is microsecond)
+* If you don't set a second argument, this class considers the system time to have been set as a second argument.
+
+### Calculation
+
+    p a.utc.strftime('%Y-%m-%d %H:%M:%S.%3N')
+    p a.tdb.strftime('%Y-%m-%d %H:%M:%S.%3N')
+    p a.jd_tdb
+    p a.sun
+    p a.moon
 
 ## Development
 
@@ -32,7 +56,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/mk_apos.
+Bug reports and pull requests are welcome on GitHub at https://github.com/komasaru/mk_apos.
 
 
 ## License
