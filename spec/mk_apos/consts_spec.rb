@@ -17,6 +17,10 @@ describe MkApos::Const do
     it { expect(MkApos::Const::MSG_ERR_4).to eq "[ERROR] Binary file is not found!" }
   end
 
+  context "MSG_ERR_5" do
+    it { expect(MkApos::Const::MSG_ERR_5).to eq "[ERROR] Newton method error!" }
+  end
+
   context "BODIES" do
     it { expect(MkApos::Const::BODIES).to match({earth: 3, moon: 10, sun: 11}) }
   end
