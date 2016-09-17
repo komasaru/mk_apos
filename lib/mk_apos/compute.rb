@@ -150,7 +150,7 @@ module MkApos
       t_2 = t_1
       pv_1 = @icrs_2[target]
       df, m = 1.0, 0
-      while df > 1.0e-10 || m > 10
+      while df > 1.0e-10
         r_12 = (0..2).map { |i| pv_1[i] - @icrs_2[:earth][i] }
         r_12_d = calc_dist(pv_1, @icrs_2[:earth])
         df = (Const::C * Const::DAYSEC / Const::AU) * (t_2 - t_1) - r_12_d
@@ -158,6 +158,7 @@ module MkApos
         df /= ((Const::C * Const::DAYSEC / Const::AU) + (df_wk) / r_12_d)
         t_1 += df
         m += 1
+        raise Const::MSG_ERR_5 if m > 10
         pv_1 = get_icrs(Const::BODIES[target], t_1)
       end
       return t_1

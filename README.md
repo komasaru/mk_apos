@@ -38,7 +38,7 @@ Or install it yourself as:
     a = MkApos.new("/path/to/<JPLEPH binary>")
 
 * You can set UTC formatted `YYYYMMDD` or `YYYYMMDDHHMMSS` or `YYYYMMDDHHMMSSU...` as an argument. (`U` is microsecond)
-* If you don't set a second argument, this class considers the system time to have been set as a second argument.
+* If you don't set a second argument, this class considers the system time to have been set as a second argument(UTC).
 
 ### Calculation
 
