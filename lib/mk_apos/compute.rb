@@ -21,7 +21,7 @@ module MkApos
     # @return: jd  (Julian Day(Numeric))
     #=========================================================================
     def get_jd(t)
-      return MkTime.new(t.strftime("%Y%m%d%H%M%S")).jd
+      return MkTime.new(t.strftime("%Y%m%d%H%M%S%6N")).jd
     rescue => e
       raise
     end
