@@ -82,7 +82,7 @@ module MkApos
     # 視黄経・視黄緯の計算（太陽）
     #
     # @param:  <none>
-    # @return: [[視赤経, 視赤緯, 地心距離], [視黄経, 視黄緯, 地心距離]]
+    # @return: [[視赤経, 視赤緯, 地心距離], [視黄経, 視黄緯, 地心距離], [視半径, 視差]]
     #=========================================================================
     def compute_sun
       # === 太陽が光を発した時刻 t1(JD) の計算
@@ -101,7 +101,12 @@ module MkApos
       eq_pol_s  = MkCoord.rect2pol(pos_sun_bpn)
       ec_rect_s = MkCoord.rect_eq2ec(pos_sun_bpn, bpn.eps)
       ec_pol_s  = MkCoord.rect2pol(ec_rect_s)
-      return [eq_pol_s, ec_pol_s]
+      # === 視半径／（地平）視差計算
+      radius = Math.asin(@asun / (eq_pol_s[2] * Const::AU / 1000))
+      radius *= 180 / Math::PI * 3600
+      parallax = Math.asin(@re / (eq_pol_s[2] * Const::AU / 1000))
+      parallax *= 180 / Math::PI * 3600
+      return [eq_pol_s, ec_pol_s, [radius, parallax]]
     rescue => e
       raise
     end
@@ -110,7 +115,7 @@ module MkApos
     # 視黄経・視黄緯の計算（月）
     #
     # @param:  <none>
-    # @return: [[視赤経, 視赤緯, 地心距離], [視黄経, 視黄緯, 地心距離]]
+    # @return: [[視赤経, 視赤緯, 地心距離], [視黄経, 視黄緯, 地心距離], [視半径, 視差]]
     #=========================================================================
     def compute_moon
       # === 月が光を発した時刻 t1(jd) の計算
@@ -129,7 +134,12 @@ module MkApos
       eq_pol_m  = MkCoord.rect2pol(pos_moon_bpn)
       ec_rect_m = MkCoord.rect_eq2ec(pos_moon_bpn, bpn.eps)
       ec_pol_m  = MkCoord.rect2pol(ec_rect_m)
-      return [eq_pol_m, ec_pol_m]
+      # === 視半径／（地平）視差計算
+      radius = Math.asin(@am / (eq_pol_m[2] * Const::AU / 1000))
+      radius *= 180 / Math::PI * 3600
+      parallax = Math.asin(@re / (eq_pol_m[2] * Const::AU / 1000))
+      parallax *= 180 / Math::PI * 3600
+      return [eq_pol_m, ec_pol_m, [radius, parallax]]
     rescue => e
       raise
     end
