@@ -31,7 +31,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency "eph_jpl"
   spec.add_dependency "mk_coord"
   spec.add_dependency "mk_time"
-  spec.add_development_dependency "bundler", "~> 1.12"
-  spec.add_development_dependency "rake", "~> 10.0"
+  #spec.add_development_dependency "bundler", "~> 1.12"
+  spec.add_development_dependency "bundler", ">= 2.2.10"
+  #spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rake", ">= 12.3.3"
   spec.add_development_dependency "rspec", "~> 3.0"
 end
